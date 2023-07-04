@@ -20,3 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::method('url', [Controller,method])->name('name');
+
+Route::get('/transactions', [App\Http\Controllers\TransactionController::class,'index'])->name('transactions.index');
