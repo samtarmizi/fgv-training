@@ -36,4 +36,9 @@ class TransactionController extends Controller
         // return redirect to transactions index page
         return redirect()->to('/transactions');
     }
+
+    public function show(Transaction $transaction)
+    {
+        return view('transactions.show', compact('transaction'));
+    }
 }
