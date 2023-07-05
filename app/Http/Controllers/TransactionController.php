@@ -61,6 +61,10 @@ class TransactionController extends Controller
 
     public function edit(Transaction $transaction)
     {
+        if($transaction->user_id != auth()->user()->id){
+            abort(403);
+        }
+        
         return view('transactions.edit', compact('transaction'));
     }
 
