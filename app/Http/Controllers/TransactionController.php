@@ -54,8 +54,8 @@ class TransactionController extends Controller
 
     public function show(Transaction $transaction)
     {
-        $this->authorize($transaction);
-        
+        $this->authorize('view',$transaction);
+
         return view('transactions.show', compact('transaction'));
     }
 
