@@ -41,4 +41,27 @@ class TransactionController extends Controller
     {
         return view('transactions.show', compact('transaction'));
     }
+
+    public function edit(Transaction $transaction)
+    {
+        return view('transactions.edit', compact('transaction'));
+    }
+
+    public function update(Transaction $transaction, Request $request)
+    {
+        // POPO Plain Old PHP Object
+        $transaction->name = $request->name;
+        $transaction->amount = $request->amount;
+        $transaction->save();
+
+        return redirect()->route('transactions.index');
+
+    }
+
+    public function delete(Transaction $transaction)
+    {
+        $transaction->delete();
+
+        return redirect()->route('transactions.index');
+    }
 }
