@@ -7,11 +7,23 @@ use App\Models\Transaction;
 
 class TransactionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // query all transaction from tables 'transactions' using Transaction model
-        $transactions = Transaction::all();
-
+        // check if keyword exist
+        if($request->keyword != null){
+            // query using keyword only
+            $transactions = Transaction::orWhere('name', 'LIKE', "%$request->keyword%")
+                            ->orWhere('amount', 'LIKE', "%$request->keyword%")
+                            ->orWhereHas('user', function($query) use($request){
+                                    $query->where('name', 'LIKE', "%$request->keyword%");
+                            })
+                            ->paginate();
+        }
+        else{
+            // query all transaction from tables 'transactions' using Transaction model
+            $transactions = Transaction::paginate();
+        }
+        
         // return view with transactions data
         // return view resources/views/transactions/index.blade.php
         return view('transactions.index', compact('transactions'));

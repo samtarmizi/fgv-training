@@ -21,6 +21,7 @@
                         </div>
 
                         <div class="form-group">
+                            <a href="{{ route('transactions.index') }}" class="btn btn-light">Back</a>
                             <button type="submit" class="btn btn-primary">Store Transaction</button>
                         </div>
                     </form>

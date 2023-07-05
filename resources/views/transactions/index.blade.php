@@ -26,6 +26,18 @@
                 <div class="card-header">{{ __('Transaction Index') }}</div>
 
                 <div class="card-body">
+                    <form method="GET" action="">
+                        <div class="input-group">
+                            <input type="text" name="keyword" class="form-control" value="{{ request()->get('keyword') }}"/>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                    <a href="{{ route('transactions.create') }}" class="btn btn-primary">
+                        Create New Transaction
+                    </a>
                 <table class="table">
                     <thead>
                         <tr>
