@@ -12,16 +12,19 @@ class TransactionController extends Controller
         // check if keyword exist
         if($request->keyword != null){
             // query using keyword only
-            $transactions = Transaction::orWhere('name', 'LIKE', "%$request->keyword%")
-                            ->orWhere('amount', 'LIKE', "%$request->keyword%")
-                            ->orWhereHas('user', function($query) use($request){
-                                    $query->where('name', 'LIKE', "%$request->keyword%");
-                            })
-                            ->paginate();
+
+            $user = auth()->user();
+            $transactions = $user->transactions()
+                                ->orWhere('name', 'LIKE', "%$request->keyword%")
+                                ->orWhere('amount', 'LIKE', "%$request->keyword%")
+                                ->paginate();
         }
         else{
+            //query current user -> transactions()
+            $user = auth()->user();
             // query all transaction from tables 'transactions' using Transaction model
-            $transactions = Transaction::paginate();
+            // $transactions = Transaction::paginate();
+            $transactions = $user->transactions()->paginate();
         }
         
         // return view with transactions data
@@ -51,6 +54,8 @@ class TransactionController extends Controller
 
     public function show(Transaction $transaction)
     {
+        $this->authorize($transaction);
+        
         return view('transactions.show', compact('transaction'));
     }
 
