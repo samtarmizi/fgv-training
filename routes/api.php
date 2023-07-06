@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login',[App\Http\Controllers\API\AuthController::class,'login'])->name('login');
 
+Route::get('/logout', [App\Http\Controllers\API\AuthController::class, 'logout'])->name('logout')->middleware('auth:api');
 // http://127.0.0.1:8000/api/visits
 Route::get('/visits', [App\Http\Controllers\API\VisitController::class,'index'])->name('visits.index')->middleware('auth:api');
 Route::post('/visits', [App\Http\Controllers\API\VisitController::class,'store'])->name('visits.store');
