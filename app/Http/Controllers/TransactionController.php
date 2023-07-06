@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use App\Models\User;
 
 class TransactionController extends Controller
 {
@@ -35,8 +36,9 @@ class TransactionController extends Controller
 
     public function create()
     {
+        $users = User::all();
         // return view resources/views/transactions/create.blade.php
-        return view('transactions.create');
+        return view('transactions.create', compact(['users']));
     }
 
     public function store(Request $request)
