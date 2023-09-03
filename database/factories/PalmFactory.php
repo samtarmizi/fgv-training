@@ -17,8 +17,8 @@ class PalmFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Trial '.fake()->word,
-            'description' => 'Trial Desc '.fake()->sentence,
+            'name' => 'Palm '.fake()->word,
+            'description' => 'Palm Desc '.fake()->sentence,
             'trial_id' => \App\Models\Trial::factory()->create()->id,
             'progeny_id' => \App\Models\Progeny::factory()->create()->id,
         ];

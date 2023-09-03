@@ -17,8 +17,8 @@ class RecordFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Palm '.fake()->word,
-            'description' => 'Palm Desc '.fake()->sentence,
+            'name' => 'Record '.fake()->word,
+            'description' => 'RecordFactory Desc '.fake()->sentence,
             'data' => rand(1999,9999),
             'palm_id' => \App\Models\Palm::factory()->create()->id,
         ];
