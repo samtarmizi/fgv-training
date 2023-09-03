@@ -18,5 +18,16 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        \App\Models\Trial::factory(10)->create();
+        \App\Models\Progeny::factory(10)->create();
+
+
+        \App\Models\Palm::factory(10)->create()->each(function ($palm) {
+            $palm->trial()->associate(\App\Models\Trial::inRandomOrder()->first());
+            $palm->progeny()->associate(\App\Models\Progeny::inRandomOrder()->first());
+            $palm->save();
+            $palm->records()->saveMany(\App\Models\Record::factory(5)->create());
+        });
     }
 }
